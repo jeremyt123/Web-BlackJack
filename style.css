@@ -1,7 +1,88 @@
 p {
     display: inline;
+    position: absolute;
+}
+
+.money {
+    top: 84%;
+    left: 28.5%;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.bet {
+    top: 84%;
+    left: 38.5%;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 body {
 	font-family: 'Roboto', sans-serif;
+    background-color: #3d3d3d;
+    color: white;
+}
+
+/*Button design*/
+button {
+    color: #000000;
+    background-color: #ffffff;
+    border: #000000 solid 1px;
+
+    margin: 0;
+    font-size: 24px;
+    position: absolute;
+    top: 90%;
+    left: 5%;
+    width: 11vw;
+    min-width: 140px;
+    height: 50px;
+    text-align: center;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+button:hover {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+button:disabled {
+    color: #ffffff;
+    background-color: #3d3d3d;
+}
+
+.bet_button {
+    left: 26.5%;
+}
+
+.bet_box {
+    color: #000000;
+    background-color: #ffffff;
+    border: #000000 solid 1px;
+    left: 36.5%;
+    top: 90%;
+    min-width: 140px;
+}
+
+.hit_button {
+    left: 57.5%;
+}
+
+.stand_button {
+    left: 85%;
+}
+
+h1 {
+    text-align: center;
+}
+
+input {
+    position: absolute;
+    text-align: center;
+    width: 11vw;
+    height: 50px;
+    font-size: 24px;
+    font-weight: bold;
 }

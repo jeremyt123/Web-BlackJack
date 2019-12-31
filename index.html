@@ -5,12 +5,10 @@
 
 <script src="function.js"></script>
 
-
-<button type="button" onclick="hit()" id="hitButton" disabled="true">Hit</button>
-<button type="button" onclick="stand()" id="standButton" disabled="true">Stand</button>
+<button type="button" onclick="hit()" id="hitButton" disabled="true" class="hit_button">Hit</button>
+<button type="button" onclick="stand()" id="standButton" disabled="true" class="stand_button">Stand</button>
 <button type="button" onclick="newGame()" id="newGameButton">New Game</button>
-<button type="button" onclick="bet()" id="betButton">Bet</button>
-<input type="text" id="betBox" placeholder="Bet Amount">
-<p id="money">Money: 100</p>
-<p id="bet">Current Bet: 0</p>
-<br>
+<button type="button" onclick="bet()" id="betButton" class="bet_button">Bet</button>
+<p id="money" class="money">Money: 100</p>
+<p id="bet" class="bet">Current Bet: 0</p>
+<input type="text" id="betBox" placeholder="Bet Amount" class="bet_box">
