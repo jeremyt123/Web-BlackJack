@@ -77,6 +77,8 @@ function newCard(hand) {
 //checks if the player has blackjack or has busted
 function bustCheck() {
     playerCardSum = 0;
+    //this sort fixes a problem with Aces being counted as 11 when they should be 1s (sends them to the end of the array)
+    playerHand.sort();
     for (var i = 0; i < playerHand.length; i++) {
         if (playerHand[i] == "A" && (playerCardSum + 11) > 21) {
             playerCardSum += 1;
@@ -195,7 +197,22 @@ function stand() {
             }
 
         } else {
-            compDone = true;
+            //fixes problem of aces being counted as 11 when they should be 1
+            compHand.sort();
+            var compHandCheck = 0;
+            for (var i = 0; i < compHand.length; i++) {
+                if (compHand[i] == "A" && (compHandCheck + 11) > 21) {
+                    compHandCheck += 1;
+                } else if (compHand[i] == "A") {
+                    compHandCheck += 11;
+                } else {
+                    compHandCheck += parseInt(compHand[i]);
+                }
+                
+            }
+            if (compHandCheck >= 16) {
+                compDone = true;
+            }
         }
     }
 
