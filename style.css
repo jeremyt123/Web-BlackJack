@@ -78,6 +78,13 @@ h1 {
     text-align: center;
 }
 
+.startText {
+    text-align: center;
+    position: relative;
+    top: 40%;
+    font-size: 50px;
+}
+
 input {
     position: absolute;
     text-align: center;

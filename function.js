@@ -131,6 +131,8 @@ function newGame(){
     //used for settings players sum for first 2 cards and for instant blackjack
     bustCheck();
 
+    document.getElementById("startText").innerText = "";
+
     var header = document.createElement("h1");
     header.innerText = "Computers Hand";
     header.className = "remove"
@@ -159,6 +161,7 @@ function newGame(){
     document.getElementById("standButton").disabled = false;
     document.getElementById("newGameButton").disabled = true;
     document.getElementById("betButton").disabled = true;
+    document.getElementById("betBox").disabled = true;
 }
 
 //player stands, computer finishes turn and winner is chosen
@@ -172,7 +175,6 @@ function stand() {
         compCardSum += 11;
     }
     
-
     while (!compDone) {
                     
         if (compCardSum < 16) {
@@ -187,11 +189,11 @@ function stand() {
             while (blank.length > 0) {
                 blank[0].parentNode.removeChild(blank[0]);
             }
-
-            if (compHand[compHand.length - 1] == "A" && (compCardSum + 11) > 21) {
-                compCardSum += 1;
-            } else if (compHand[compHand.length - 1] == "A") {
+            if (compHand[compHand.length - 1] == "A" && (compCardSum + 11) == 21) {
                 compCardSum += 11;
+                compDone = true;
+            } else if (compHand[compHand.length - 1] == "A") {
+                compCardSum += 1;
             } else {
                 compCardSum += parseInt(compHand[compHand.length - 1]);
             }
@@ -201,10 +203,10 @@ function stand() {
             compHand.sort();
             var compHandCheck = 0;
             for (var i = 0; i < compHand.length; i++) {
-                if (compHand[i] == "A" && (compHandCheck + 11) > 21) {
-                    compHandCheck += 1;
-                } else if (compHand[i] == "A") {
+                if (compHand[i] == "A" && (compHandCheck + 11) == 21) {
                     compHandCheck += 11;
+                } else if (compHand[i] == "A") {
+                    compHandCheck += 1;
                 } else {
                     compHandCheck += parseInt(compHand[i]);
                 }
@@ -212,6 +214,8 @@ function stand() {
             }
             if (compHandCheck >= 16) {
                 compDone = true;
+            } else {
+                compCardSum = compHandCheck;
             }
         }
     }
@@ -219,19 +223,27 @@ function stand() {
     document.getElementById("standButton").disabled = true;
     document.getElementById("hitButton").disabled = true;
 
+    //printing out the game results and winner
     var pResult = document.createElement("h4");
     pResult.innerText = "Players Hand = " + playerCardSum;
     pResult.className = "remove"
+    pResult.style = "font-size: 2vw;position: absolute; left: 20%; top: 70%; display: inline;"
     document.body.append(pResult);
 
     var cResult = document.createElement("h4");
     cResult.innerText = "Computers Hand = " + compCardSum;
     cResult.className = "remove"
+    cResult.style = "font-size: 2vw;position: absolute; left: 60%; top: 70%; display: inline;"
     document.body.append(cResult);
 
     var winner = document.createElement("h4");
-    winner.innerText = "Winner: " + checkWinner();
+    if (checkWinner() == "Tie") {
+        winner.innerText = "Tie Game!"
+    } else {
+        winner.innerText = checkWinner() + " Wins!";
+    }
     winner.className = "remove"
+    winner.style = "font-size: 3vw; text-align: center;"
     document.body.append(winner);
 
     if (checkWinner() == "Player" && betAmount > 0) {
@@ -245,10 +257,12 @@ function stand() {
     document.getElementById("bet").innerHTML = "Current Bet: " + betAmount;
 
     document.getElementById("betButton").disabled = false;
+    document.getElementById("betBox").disabled = false;
     document.getElementById("newGameButton").disabled = false;
 
 }
 
+//checks who won the game
 function checkWinner() {
     if (playerCardSum > 21 && compCardSum > 21) {
         return "Tie";
@@ -292,4 +306,5 @@ function bet() {
     document.getElementById("money").innerHTML = "Money: " + money;
     document.getElementById("bet").innerHTML = "Current Bet: " + betAmount;
     document.getElementById("betButton").disabled = true;
+    document.getElementById("betBox").disabled = true;
 }
